@@ -19,7 +19,9 @@ console.log('Manifest Path', manifestPath)
 console.log('Reading File')
 
 const manifest = readFileSync(manifestPath)
+
 manifest.start_url = startUrl
+manifest.scope = startUrl
 
 console.log('Writing File')
 
