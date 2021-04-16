@@ -2,8 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build && next export && posthtml out/*.html -u posthtml-plugin-relative-urls",
-    "build:gh-pages": "npm run build && node buildGhPages"
+    "build": "node buildGhPages && next build && next export && posthtml out/*.html -u posthtml-plugin-relative-urls"
   },
   "dependencies": {
     "next": "^10.1.3",
