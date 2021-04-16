@@ -6,9 +6,9 @@ const {
   join
 } = require('path')
 
-const repo = process.env.GITHUB_REPOSITORY.split('/')[1]
+const repo = process.env.GITHUB_REPOSITORY !== undefined &&process.env.GITHUB_REPOSITORY.split('/')[1]
 
-const startUrl = `/${repo}`
+const startUrl = `/${repo || ''}`
 
 console.log('Start Url:', startUrl)
 
