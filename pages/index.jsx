@@ -6,7 +6,7 @@ const App = () => {
       <Head>
         <title>Picture List</title>
       </Head>
-      <h1>This should work offline</h1>
+      <h1>Picture List</h1>
     </>
   )
 }

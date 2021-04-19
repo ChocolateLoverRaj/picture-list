@@ -9,6 +9,9 @@ const App = props => {
         <link rel='manifest' href="app.webmanifest" />
       </Head>
       <Component {...pageProps} />
+      <footer>
+        Made by Banana Custom Apps
+      </footer>
     </>
   )
 }
