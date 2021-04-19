@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import 'antd/dist/antd.css'
 
 const App = props => {
   const { Component, pageProps } = props
