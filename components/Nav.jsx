@@ -25,7 +25,7 @@ const Nav = () => {
   return (
     <Breadcrumb>
       <Breadcrumb.Item>
-        <Image src='/icon-192px.png' width={50} height={50} />
+        <Image src='/icon-192px.png' width={20} height={20} />
       </Breadcrumb.Item>
       <Breadcrumb.Item overlay={menu}>
         {headers.get(route)}
