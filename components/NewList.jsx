@@ -8,7 +8,9 @@ import { useContext } from 'react'
 import GlobalContext from '../contexts/Global'
 
 const NewList = props => {
-  const [lists, setLists] = useContext(GlobalContext)
+  const [lists, setLists] = typeof window !== 'undefined'
+    ? useContext(GlobalContext)
+    : [[]]
   const [creating, setCreating] = useState(false)
   const [formValue, setFormValue] = useState({ name: '' })
 
