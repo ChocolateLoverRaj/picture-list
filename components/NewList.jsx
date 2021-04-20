@@ -68,16 +68,17 @@ const NewList = props => {
                 required: true,
                 message: 'Please enter a name for the list!'
               },
-              ({ getFieldValue }) => ({
-                validator: (_, value) => (
-                  !lists.includes(value.trim())
+              () => ({
+                validator: (_, name) => {
+                  const trimmedName = name.trim()
+                  return !lists.find(({ name }) => name === trimmedName) !== undefined
                     ? Promise.resolve()
                     : Promise.reject(
                       new Error(
                         'There is already a list with that name!'
                       )
                     )
-                )
+                }
               })
             ]}
           >
