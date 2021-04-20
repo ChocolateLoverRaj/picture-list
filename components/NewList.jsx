@@ -10,23 +10,30 @@ import {
 } from 'react'
 import GlobalContext from '../contexts/Global'
 
+const { useForm } = Form
+
 const NewList = props => {
   const [lists, setLists] = useContext(GlobalContext)
   const [creating, setCreating] = useState(false)
-  const [formValue, setFormValue] = useState({ name: '' })
+  const [form] = useForm()
 
   const handleCreate = () => {
     setCreating(true)
   }
 
   const handleOk = () => {
-    setLists([
-      ...lists,
-      {
-        name: formValue.name,
-        items: []
-      }
-    ])
+    form
+      .validateFields()
+      .then(values => {
+         setLists([
+          ...lists,
+          {
+            name: values.name,
+            items: []
+          }
+        ])
+      })
+      .catch(null)
   }
 
   const handleCancel = () => {
@@ -48,8 +55,10 @@ const NewList = props => {
         onCancel={handleCancel}
       >
         <Form
-          value={formValue}
-          onChange={setFormValue}
+          form={form}
+          initialValues={{
+            name: ''
+          }}
         >
           <Form.Item
             label='List Name'
