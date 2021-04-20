@@ -28,7 +28,7 @@ const NewList = props => {
          setLists([
           ...lists,
           {
-            name: values.name,
+            name: values.name.trim(),
             items: []
           }
         ])
@@ -63,10 +63,23 @@ const NewList = props => {
           <Form.Item
             label='List Name'
             name='name'
-            rules={[{
-              required: true,
-              message: 'Please enter a name for the list!'
-            }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please enter a name for the list!'
+              },
+              ({ getFieldValue }) => ({
+                validator: (_, value) => (
+                  !lists.includes(value.trim())
+                    ? Promise.resolve()
+                    : Promise.reject(
+                      new Error(
+                        'There is already a list with that name!'
+                      )
+                    )
+                )
+              })
+            ]}
           >
             <Input 
               placeholder='Grocery List' 
