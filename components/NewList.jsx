@@ -4,7 +4,10 @@ import {
   Form,
   Input
 } from 'antd'
-import { useContext } from 'react'
+import { 
+  useContext, 
+  useState
+} from 'react'
 import GlobalContext from '../contexts/Global'
 
 const NewList = props => {
