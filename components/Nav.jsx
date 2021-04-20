@@ -10,7 +10,7 @@ const menu = (
   <Menu>
     {[...headers].map(([page, header]) => (
       <Menu.Item>
-      <Link href={`.${page}`}>
+      <Link href={page.slice(1)}>
         {header}
       </Link>
     </Menu.Item>
