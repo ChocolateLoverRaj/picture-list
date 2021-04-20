@@ -4,9 +4,13 @@ import {
   Input, 
   Button, 
   Empty,
-  Card
+  Card,
+  Popconfirm
 } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { 
+  SearchOutlined,
+  DeleteOutlined
+} from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
 import { useState, useContext } from 'react'
@@ -28,11 +32,30 @@ const App = () => {
       />
       {lists.length > 0
         ? (
-          lists.map(({ name }) => (
-            <Card
-              key={name} 
-              title={name} 
-            />
+          lists.map(({ name }, i) => {
+            const handleConfirm = () => {
+              setLists([
+                ...lists.slice(0, i),
+                ...lists.slice(i + 1)
+              ])
+            }
+
+            return (
+              <Card
+                key={name} 
+                title={name} 
+                actions={[
+                  <Popconfirm
+                    title='Are you sure you want to delete this list?'
+                    okText='Yes'
+                    cancelText='No'
+                    onConfirm={handleConfirm}
+                  >
+                    <DeleteOutlined />
+                  </Popconfirm>
+                ]}
+              />
+            )
           ))
         )
         : (
