@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import 'antd/dist/antd.css'
 import GlobalContext from '../contexts/Global'
+import useLocalStorage from 'use-local-storage'
 
 const App = props => {
   const { Component, pageProps } = props
 
-  const listsState = useLS('lists', [])
+  const listsState = useLocalStorage('lists', [])
   
   return (
     <>
