@@ -1,0 +1,22 @@
+{
+  "name": "Picture List",
+  "short_name": "Picture List",
+  "description": "Create a list with pictures for items.",
+  "icons": [
+    {
+      "src": "icon-192px.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512px.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/picture-list",
+  "display": "standalone",
+  "theme_color": "yellow",
+  "background_color": "yellow",
+  "scope": "/picture-list"
+}
