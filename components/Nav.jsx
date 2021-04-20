@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { Breadcrumb, Menu } from 'antd'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const headers = new Map()
   .set('/', 'Lists')
@@ -24,10 +25,10 @@ const Nav = () => {
   return (
     <Breadcrumb>
       <Breadcrumb.Item>
-        <img src='/icon-192px.png' width={50} height={50} />
+        <Image src='/icon-192px.png' width={50} height={50} />
       </Breadcrumb.Item>
       <Breadcrumb.Item overlay={menu}>
-        <a href=''>{headers.get(route)}</a>
+        {headers.get(route)}
       </Breadcrumb.Item>
     </Breadcrumb>
   )
