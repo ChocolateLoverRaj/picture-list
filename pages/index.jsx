@@ -3,7 +3,8 @@ import Nav from '../components/Nav'
 import { 
   Input, 
   Button, 
-  Empty
+  Empty,
+  Card
 } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import useLS from 'use-local-storage'
@@ -26,7 +27,14 @@ const App = () => {
         addonAfter={<NewList />}
       />
       {lists.length > 0
-        ? 'List coming soon'
+        ? (
+          lists.map(({ name }) => (
+            <Card
+              key={name} 
+              title={name} 
+            />
+          ))
+        )
         : (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
