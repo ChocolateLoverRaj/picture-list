@@ -3,14 +3,29 @@ import Nav from '../components/Nav'
 import { 
   Input, 
   Button, 
-  Empty 
+  Empty,
+  Modal
 } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
+import { useState } from 'react'
 
 const App = () => {
   const [lists, setLists] = useLS('lists', [])
+  const [creating, setCreating] = useState(false)
+
+  const handleCreate = () => {
+    setCreating(true)
+  }
+
+  const handleOk = () => {
+    alert('Create coming soon')
+  }
+
+  const handleCancel = () => {
+    setCreating(false)
+  }
 
   return (
     <>
@@ -21,17 +36,32 @@ const App = () => {
       <Nav />
       <Input
         prefix={<SearchOutlined />}
-        addonAfter={<NewList />}
+        addonAfter={
+          <NewList 
+            onClick={handleCreate}
+          />
+        }
       />
       {lists.length > 0
         ? 'List coming soon'
         : (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description='No Lists'
           >
-            <NewList />
+            <NewList 
+              onClick={handleCreate}
+            />
           </Empty>
         )}
+      <Modal 
+        title='New List'
+        visible={creating}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        Form coming soon
+      </Modal>
     </>
   )
 }

@@ -1,9 +1,16 @@
 import { Button } from 'antd'
 
-const NewList = () => (
-  <Button type='primary'>
-    New List
-  </Button>
-)
+const NewList = props => {
+  const { onClick } = props
+
+  return (
+    <Button 
+      type='primary'
+      onClick={onClick}
+    >
+      New List
+    </Button>
+  )
+}
 
 export default NewList
