@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build && next export && move out/service-worker.js public/service-worker.js"
+    "build": "next build && move .next/service-worker.js public/service-worker.js"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
