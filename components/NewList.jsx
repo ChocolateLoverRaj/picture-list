@@ -1,15 +1,67 @@
-import { Button } from 'antd'
+import { 
+  Button,
+  Modal,
+  Form,
+  Input
+} from 'antd'
+import { useContext } from 'react'
+import GlobalContext from '../contexts/Global'
 
 const NewList = props => {
-  const { onClick } = props
+  const [lists, setLists] = useContext(GlobalContext)
+  const [creating, setCreating] = useState(false)
+  const [formValue, setFormValue] = useState({ name: '' })
+
+  const handleCreate = () => {
+    setCreating(true)
+  }
+
+  const handleOk = () => {
+    setLists([
+      ...lists,
+      {
+        name: formValue.
+      }
+    ])
+  }
+
+  const handleCancel = () => {
+    setCreating(false)
+  }
 
   return (
-    <Button 
-      type='primary'
-      onClick={onClick}
-    >
-      New List
-    </Button>
+    <>
+      <Button 
+        type='primary'
+        onClick={handleCreate}
+      >
+        New List
+      </Button>
+      <Modal 
+        title='New List'
+        visible={creating}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Form
+          value={formValue}
+          onChange={setFormValue}
+        >
+          <Form.Item
+            label='List Name'
+            name='name'
+            rules={[{
+              required: true,
+              message: 'Please enter a name for the list!'
+            }]}
+          >
+            <Input 
+              placeholder='Grocery List' 
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
   )
 }
 

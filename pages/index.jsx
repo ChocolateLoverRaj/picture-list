@@ -3,29 +3,16 @@ import Nav from '../components/Nav'
 import { 
   Input, 
   Button, 
-  Empty,
-  Modal
+  Empty
 } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import GlobalContext from '../contexts/Global'
 
 const App = () => {
-  const [lists, setLists] = useLS('lists', [])
-  const [creating, setCreating] = useState(false)
-
-  const handleCreate = () => {
-    setCreating(true)
-  }
-
-  const handleOk = () => {
-    alert('Create coming soon')
-  }
-
-  const handleCancel = () => {
-    setCreating(false)
-  }
+  const [lists, setLists] = useContext(GlobalContext)
 
   return (
     <>
@@ -36,11 +23,7 @@ const App = () => {
       <Nav />
       <Input
         prefix={<SearchOutlined />}
-        addonAfter={
-          <NewList 
-            onClick={handleCreate}
-          />
-        }
+        addonAfter={<NewList />}
       />
       {lists.length > 0
         ? 'List coming soon'
@@ -49,19 +32,9 @@ const App = () => {
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description='No Lists'
           >
-            <NewList 
-              onClick={handleCreate}
-            />
+            <NewList />
           </Empty>
         )}
-      <Modal 
-        title='New List'
-        visible={creating}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        Form coming soon
-      </Modal>
     </>
   )
 }
