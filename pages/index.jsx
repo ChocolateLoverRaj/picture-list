@@ -54,7 +54,9 @@ const App = () => {
                     <DeleteOutlined />
                   </Popconfirm>
                 ]}
-              />
+              >
+                Data coming soon
+              </Card>
             )
           })
         )
