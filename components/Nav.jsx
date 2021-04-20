@@ -11,7 +11,7 @@ const menu = (
   <Menu>
     {[...headers].map(([page, header]) => (
       <Menu.Item>
-      <Link href={page.slice(1)}>
+      <Link href={page}>
         {header}
       </Link>
     </Menu.Item>
