@@ -71,7 +71,7 @@ const NewList = props => {
               () => ({
                 validator: (_, name) => {
                   const trimmedName = name.trim()
-                  return !lists.find(({ name }) => name === trimmedName) !== undefined
+                  return lists.find(({ name }) => name === trimmedName) === undefined
                     ? Promise.resolve()
                     : Promise.reject(
                       new Error(
