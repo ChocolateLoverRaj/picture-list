@@ -6,7 +6,9 @@ import useLocalStorage from 'use-local-storage'
 const App = props => {
   const { Component, pageProps } = props
 
-  const listsState = useLocalStorage('lists', [])
+  const listsState = typeof window !== 'undefined'
+    ? useLocalStorage('lists', [])
+    : [[]]
   
   return (
     <>
