@@ -7,7 +7,7 @@ const App = props => {
   return (
     <>
       <Head>
-        <link rel='manifest' href="app.webmanifest" />
+        <link rel='manifest' href='app.webmanifest' />
       </Head>
       <Component {...pageProps} />
       <footer>
