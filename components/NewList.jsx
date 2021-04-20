@@ -20,7 +20,8 @@ const NewList = props => {
     setLists([
       ...lists,
       {
-        name: formValue.
+        name: formValue.name,
+        items: []
       }
     ])
   }
