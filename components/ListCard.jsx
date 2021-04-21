@@ -1,5 +1,5 @@
 import GlobalContext from '../contexts/Global'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Link from 'next/link'
 import {
   Card,
@@ -7,7 +7,8 @@ import {
 } from 'antd'
 import {
   EyeOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  EditOutlined
 } from '@ant-design/icons'
 import styles from '../styles/ListCard.module.css'
 
@@ -23,28 +24,47 @@ const ListCard = props => {
     ])
   }
 
+  const [renaming, setRenaming] = useState(false)
+
+  const handleRename = () => {
+    setRenaming(true)
+  }
+
+  const handleCancel = () => {
+    setRenaming(false)
+  }
+
   return (
-    <Card
-      className={styles.card}
-      title={name}
-      extra={
-        <Link 
-          href={`/lists/${name}`}
-        >
-          <EyeOutlined />
-        </Link>
-      }
-      actions={[
-        <Popconfirm
-          title='Are you sure you want to delete this list?'
-          okText='Yes'
-          cancelText='No'
-          onConfirm={handleConfirm}
-        >
-          <DeleteOutlined />
-        </Popconfirm>
-      ]}
-    />
+    <>
+      <Card
+        className={styles.card}
+        title={name}
+        extra={
+          <Link 
+            href={`/lists/${name}`}
+          >
+            <EyeOutlined />
+          </Link>
+        }
+        actions={[
+          <EditOutlined onClick={handleRename} />,
+          <Popconfirm
+            title='Are you sure you want to delete this list?'
+            okText='Yes'
+            cancelText='No'
+            onConfirm={handleConfirm}
+          >
+            <DeleteOutlined />
+          </Popconfirm>
+        ]}
+      />
+      <Modal
+        visible={renaming}
+        onCancel={handleCancel}
+      >
+        Rename form coming soon
+      </Modal>
+    </>
   )
 }
 
