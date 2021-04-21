@@ -3,7 +3,8 @@ import { useContext, useState } from 'react'
 import Link from 'next/link'
 import {
   Card,
-  Popconfirm
+  Popconfirm,
+  Modal
 } from 'antd'
 import {
   EyeOutlined,
@@ -47,7 +48,9 @@ const ListCard = props => {
           </Link>
         }
         actions={[
-          /*<EditOutlined onClick={handleRename} />,*/
+          <EditOutlined 
+            onClick={handleRename} 
+          />,
           <Popconfirm
             title='Are you sure you want to delete this list?'
             okText='Yes'
@@ -58,13 +61,13 @@ const ListCard = props => {
           </Popconfirm>
         ]}
       />
-      {/*<Modal
+      <Modal
         title={`Rename list '${name}'`}
         visible={renaming}
         onCancel={handleCancel}
       >
         Rename form coming soon
-      </Modal>*/}
+      </Modal>
     </>
   )
 }
