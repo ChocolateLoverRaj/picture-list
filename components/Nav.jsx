@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const headers = new Map()
-  .set('/', 'Lists')
+  .set('/lists', 'Lists')
   .set('/pictures', 'Pictures')
 
 const menu = (
@@ -29,7 +29,7 @@ const Nav = () => {
       </Breadcrumb.Item>
       <Breadcrumb.Item overlay={menu}>
         {headers.get(
-          `/${route.split('/')[0]}`
+          `/${route.split('/')[1]}`
         )}
       </Breadcrumb.Item>
     </Breadcrumb>
