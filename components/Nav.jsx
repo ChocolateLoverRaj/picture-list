@@ -20,7 +20,10 @@ const menu = (
 )
 
 const Nav = () => {
-  const { route } = useRouter()
+  const { 
+    route, 
+    query: { name } 
+  } = useRouter()
 
   return (
     <Breadcrumb>
@@ -32,6 +35,11 @@ const Nav = () => {
           `/${route.split('/')[1]}`
         )}
       </Breadcrumb.Item>
+      {route.startsWith('/lists') && (
+        <Breadcrumb.Item>
+          {name}
+        </Breadcrumb.Item>
+      )}
     </Breadcrumb>
   )
 }
