@@ -79,7 +79,7 @@ const App = () => {
                 Clear Filter
               </Button>
               <NewList />
-            </NewList>
+            </Empty>
           )
         )
         : (
