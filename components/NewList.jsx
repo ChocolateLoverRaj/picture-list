@@ -36,7 +36,7 @@ const NewList = props => {
             items: []
           }
         ])
-        form.reset()
+        form.resetFields()
         setCreating(false)
         message.success(`Created a list called '${name}'`)
         router.replace(`/lists/${name}`)
