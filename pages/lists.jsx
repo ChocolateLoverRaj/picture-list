@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Title from '../components/Title'
 import { 
   Input, 
   Button, 
@@ -15,6 +15,7 @@ import GlobalContext from '../contexts/Global'
 import Link from 'next/link'
 import ListCard from '../components/ListCard'
 import Fuse from 'fuse.js'
+import { mainTitle, listsTitle } from '../lib/titles'
 
 const App = () => {
   const [
@@ -46,9 +47,7 @@ const App = () => {
 
   return (
     <>
-      <Head>
-        <title>Picture List</title>
-      </Head>
+      <Title paths={[listsTitle, mainTitle]} />
       <Input
         prefix={<SearchOutlined />}
         addonAfter={<NewList />}

@@ -1,7 +1,10 @@
+import { picturesTitle, mainTitle } from '../lib/titles'
+import Title from '../components/Title'
+
 const PicturesPage = () => {
   return (
     <>
-      Pictures Page coming soon
+      <Title paths={[picturesTitle, mainTitle]} />
     </>
   )
 }
