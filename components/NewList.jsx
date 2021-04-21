@@ -34,6 +34,7 @@ const NewList = props => {
             items: []
           }
         ])
+        form.reset()
         setCreating(false)
         message.success(`Created a list called '${name}'`)
       })
