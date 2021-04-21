@@ -2,7 +2,8 @@ import {
   Button,
   Modal,
   Form,
-  Input
+  Input,
+  message
 } from 'antd'
 import { 
   useContext, 
@@ -25,13 +26,16 @@ const NewList = props => {
     form
       .validateFields()
       .then(values => {
-         setLists([
+        const name = values.name.trim()
+        setLists([
           ...lists,
           {
-            name: values.name.trim(),
+            name,
             items: []
           }
         ])
+        setCreating(false)
+        message.success(`Created a list called '${name}'`)
       })
       .catch(null)
   }
