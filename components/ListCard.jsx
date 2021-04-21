@@ -58,13 +58,13 @@ const ListCard = props => {
           </Popconfirm>
         ]}
       />
-      <Modal
+      {/*<Modal
         title={`Rename list '${name}'`}
         visible={renaming}
         onCancel={handleCancel}
       >
         Rename form coming soon
-      </Modal>
+      </Modal>*/}
     </>
   )
 }
