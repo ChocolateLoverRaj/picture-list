@@ -5,7 +5,8 @@ import {
   Empty
 } from 'antd'
 import { 
-  SearchOutlined
+  SearchOutlined,
+  CloseCircleFilled
 } from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
@@ -31,6 +32,18 @@ const App = () => {
     setSearch(value)
   }
 
+  const handleClear = () => {
+    setSearch('')
+  }
+
+  const filteredLists = searchValue.trim() !== ''
+    ? new Fuse(lists, {
+      keys: ['name']
+      })
+        .search(searchValue)
+        .map(({ item }) => item)
+    : lists
+
   return (
     <>
       <Head>
@@ -45,14 +58,29 @@ const App = () => {
         onChange={handleChange}
       />
       {lists.length > 0
-        ? (
-          lists.map(({ name }, i) => (
+        ? filteredLists.length > 0
+          ? filteredLists.map(({ name }, i) => (
             <ListCard 
               key={name}
               index={i} 
               name={name} 
             />
           ))
+          : (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={'No lists matched your search'}
+            >
+              <Button 
+                type='dashed' 
+                onClick={handleClear}
+                icon={<CloseCircleFilled />}
+              >
+                Clear Filter
+              </Button>
+              <NewList />
+            </NewList>
+          )
         )
         : (
           <Empty
