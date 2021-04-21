@@ -10,6 +10,7 @@ import {
   useState
 } from 'react'
 import GlobalContext from '../contexts/Global'
+import { useRouter } from 'next/router'
 
 const { useForm } = Form
 
@@ -17,6 +18,7 @@ const NewList = props => {
   const [lists, setLists] = useContext(GlobalContext)
   const [creating, setCreating] = useState(false)
   const [form] = useForm()
+  const router = useRouter()
 
   const handleCreate = () => {
     setCreating(true)
@@ -37,6 +39,7 @@ const NewList = props => {
         form.reset()
         setCreating(false)
         message.success(`Created a list called '${name}'`)
+        router.replace(`/lists/${name}`)
       })
       .catch(null)
   }
