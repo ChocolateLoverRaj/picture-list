@@ -13,6 +13,7 @@ import NewList from '../components/NewList'
 import { useState, useContext } from 'react'
 import GlobalContext from '../contexts/Global'
 import Link from 'next/link'
+import ListCard from '../components/ListCard'
 
 const App = () => {
   const [lists, setLists] = useContext(GlobalContext)
