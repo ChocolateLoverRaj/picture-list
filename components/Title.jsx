@@ -5,7 +5,7 @@ const Title = props => {
   
   return (
     <Head>
-      <title>{paths.join('\u2022')}</title>
+      <title>{paths.join(' \u2022 ')}</title>
     </Head>
   )
 }
