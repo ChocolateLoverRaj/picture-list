@@ -3,14 +3,10 @@ import Nav from '../components/Nav'
 import { 
   Input, 
   Button, 
-  Empty,
-  Card,
-  Popconfirm
+  Empty
 } from 'antd'
 import { 
-  SearchOutlined,
-  DeleteOutlined,
-  EyeOutlined
+  SearchOutlined
 } from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
@@ -34,39 +30,13 @@ const App = () => {
       />
       {lists.length > 0
         ? (
-          lists.map(({ name }, i) => {
-            const handleConfirm = () => {
-              setLists([
-                ...lists.slice(0, i),
-                ...lists.slice(i + 1)
-              ])
-            }
-
-            return (
-              <Card
-                style={{ width: 300 }}
-                key={name} 
-                title={name}
-                extra={
-                  <Link 
-                    href={`/lists/${name}`}
-                  >
-                    <EyeOutlined />
-                  </Link>
-                }
-                actions={[
-                  <Popconfirm
-                    title='Are you sure you want to delete this list?'
-                    okText='Yes'
-                    cancelText='No'
-                    onConfirm={handleConfirm}
-                  >
-                    <DeleteOutlined />
-                  </Popconfirm>
-                ]}
-              />
-            )
-          })
+          lists.map(({ name }, i) => (
+            <ListCard 
+              key={name}
+              index={i} 
+              name={name} 
+            />
+          ))
         )
         : (
           <Empty
