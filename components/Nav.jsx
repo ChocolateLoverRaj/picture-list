@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import { Breadcrumb, Menu } from 'antd'
 import Link from 'next/link'
 import Image from 'next/image'
+import GlobalContext from '../contexts/Global'
+import { useContext } from 'react'
 
 const headers = new Map()
   .set('/lists', 'Lists')
@@ -10,7 +12,7 @@ const headers = new Map()
 const menu = (
   <Menu>
     {[...headers].map(([page, header]) => (
-      <Menu.Item>
+      <Menu.Item key={page}>
         <Link href={page}>
           {header}
         </Link>
@@ -24,6 +26,7 @@ const Nav = () => {
     route, 
     query: { name } 
   } = useRouter()
+  const [lists] = useContext(GlobalContext)
 
   return (
     <Breadcrumb>
@@ -36,7 +39,21 @@ const Nav = () => {
         )}
       </Breadcrumb.Item>
       {route.startsWith('/lists') && (
-        <Breadcrumb.Item>
+        <Breadcrumb.Item
+          overlay={
+            <Menu>
+              {lists.map(({ name }) => (
+                <Menu.Item key={name}>
+                  <Link 
+                    href={`/lists/${name}`}
+                  >
+                    {name}
+                  </Link>
+                </Menu.Item>
+              ))}
+            </Menu>
+          }
+        >
           {name}
         </Breadcrumb.Item>
       )}
