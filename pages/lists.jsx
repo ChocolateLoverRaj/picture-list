@@ -25,6 +25,12 @@ const App = () => {
     setSearch
   ] = useState('')
 
+  const handleChange = ({ 
+    target: { value }
+  }) => {
+    setSearch(value)
+  }
+
   return (
     <>
       <Head>
@@ -36,7 +42,7 @@ const App = () => {
         allowClear
         placeholder='Filter lists by name'
         value={search}
-        onChange={setSearch}
+        onChange={handleChange}
       />
       {lists.length > 0
         ? (
