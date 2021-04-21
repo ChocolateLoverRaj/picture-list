@@ -81,7 +81,6 @@ const App = () => {
               <NewList />
             </Empty>
           )
-        )
         : (
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
