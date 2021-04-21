@@ -47,7 +47,7 @@ const ListCard = props => {
           </Link>
         }
         actions={[
-          <EditOutlined onClick={handleRename} />,
+          /*<EditOutlined onClick={handleRename} />,*/
           <Popconfirm
             title='Are you sure you want to delete this list?'
             okText='Yes'
