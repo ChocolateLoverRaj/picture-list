@@ -1,5 +1,5 @@
-import { mainTitle, listsTitle } from '../lib/titles'
-import Title from '../components/Title'
+import { mainTitle, listsTitle } from '../../lib/titles'
+import Title from '../../components/Title'
 import { useRouter } from 'next/router'
 
 const ListPage = () => {
