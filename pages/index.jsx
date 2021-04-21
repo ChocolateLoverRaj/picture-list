@@ -9,12 +9,14 @@ import {
 } from 'antd'
 import { 
   SearchOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  EyeOutlined
 } from '@ant-design/icons'
 import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
 import { useState, useContext } from 'react'
 import GlobalContext from '../contexts/Global'
+import Link from 'next/link'
 
 const App = () => {
   const [lists, setLists] = useContext(GlobalContext)
@@ -44,7 +46,14 @@ const App = () => {
               <Card
                 style={{ width: 300 }}
                 key={name} 
-                title={name} 
+                title={name}
+                extra={
+                  <Link 
+                    href={`./${name}`}
+                  >
+                    <EyeOutlined />
+                  </Link>
+                }
                 actions={[
                   <Popconfirm
                     title='Are you sure you want to delete this list?'
@@ -55,9 +64,7 @@ const App = () => {
                     <DeleteOutlined />
                   </Popconfirm>
                 ]}
-              >
-                Data coming soon
-              </Card>
+              />
             )
           })
         )

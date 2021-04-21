@@ -11,10 +11,10 @@ const menu = (
   <Menu>
     {[...headers].map(([page, header]) => (
       <Menu.Item>
-      <Link href={page}>
-        {header}
-      </Link>
-    </Menu.Item>
+        <Link href={page}>
+          {header}
+        </Link>
+      </Menu.Item>
     ))}
   </Menu>
 )
@@ -28,7 +28,9 @@ const Nav = () => {
         <Image src='/icon-192px.png' width={20} height={20} />
       </Breadcrumb.Item>
       <Breadcrumb.Item overlay={menu}>
-        {headers.get(route)}
+        {headers.get(
+          `/${route.split('/')[0]}`
+        )}
       </Breadcrumb.Item>
     </Breadcrumb>
   )
