@@ -49,7 +49,7 @@ const App = () => {
                 title={name}
                 extra={
                   <Link 
-                    href={`./${name}`}
+                    href={`/lists/${name}`}
                   >
                     <EyeOutlined />
                   </Link>
