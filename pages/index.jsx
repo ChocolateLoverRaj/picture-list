@@ -42,6 +42,7 @@ const App = () => {
 
             return (
               <Card
+                style={{ width: 300 }}
                 key={name} 
                 title={name} 
                 actions={[
