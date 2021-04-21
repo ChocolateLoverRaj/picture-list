@@ -36,11 +36,11 @@ const App = () => {
     setSearch('')
   }
 
-  const filteredLists = searchValue.trim() !== ''
+  const filteredLists = search.trim() !== ''
     ? new Fuse(lists, {
       keys: ['name']
       })
-        .search(searchValue)
+        .search(search)
         .map(({ item }) => item)
     : lists
 
