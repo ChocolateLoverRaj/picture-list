@@ -2,6 +2,7 @@ import Head from 'next/head'
 import 'antd/dist/antd.css'
 import GlobalContext from '../contexts/Global'
 import useLocalStorage from 'use-local-storage'
+import Nav from '../components/Nav'
 
 const App = props => {
   const { Component, pageProps } = props
@@ -11,19 +12,18 @@ const App = props => {
     : [[]]
   
   return (
-    <>
+    <GlobalContext.Provider
+      value={listsState}
+    >
       <Head>
         <link rel='manifest' href='app.webmanifest' />
       </Head>
-      <GlobalContext.Provider
-       value={listsState}
-      >
-        <Component {...pageProps} />
-      </GlobalContext.Provider>
+      <Nav />
+      <Component {...pageProps} />
       <footer>
         Made by Banana Custom Apps
       </footer>
-    </>
+    </GlobalContext.Provider>
   )
 }
 

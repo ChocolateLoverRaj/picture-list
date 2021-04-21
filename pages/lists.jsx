@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Nav from '../components/Nav'
 import { 
   Input, 
   Button, 
@@ -14,19 +13,30 @@ import { useState, useContext } from 'react'
 import GlobalContext from '../contexts/Global'
 import Link from 'next/link'
 import ListCard from '../components/ListCard'
+import Fuse from 'fuse.js'
 
 const App = () => {
-  const [lists, setLists] = useContext(GlobalContext)
+  const [
+    lists, 
+    setLists
+  ] = useContext(GlobalContext)
+  const [
+    search, 
+    setSearch
+  ] = useState('')
 
   return (
     <>
       <Head>
         <title>Picture List</title>
       </Head>
-      <Nav />
       <Input
         prefix={<SearchOutlined />}
         addonAfter={<NewList />}
+        allowClear
+        placeholder='Filter lists by name'
+        value={search}
+        onChange={setSearch}
       />
       {lists.length > 0
         ? (
