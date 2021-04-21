@@ -59,6 +59,7 @@ const ListCard = props => {
         ]}
       />
       <Modal
+        title={`Rename list '${name}'`}
         visible={renaming}
         onCancel={handleCancel}
       >
