@@ -10,7 +10,7 @@ import {
   DeleteOutlined
 } from '@ant-design/icons'
 import { useState } from 'react'
-import Camera from 'react-html5-camera-photo'
+import Webcam from 'react-webcam'
 
 const ImageInput = props => {
   const { value, onChange } = props
@@ -37,7 +37,9 @@ const ImageInput = props => {
     <>
       <Card
         cover={value !== undefined
-          ? <Image src={value} />
+          ? taking
+            ? <Webcam audio={false} />
+            : <Image src={value} />
           : (
             <Empty 
               image={<PictureOutlined />}
@@ -59,11 +61,6 @@ const ImageInput = props => {
           </Popconfirm>
         ]}
       />
-      {taking && (
-        <Camera 
-          onTakePhoto={handleTakePhoto}
-        />
-      )}
     </>
   )
 }
