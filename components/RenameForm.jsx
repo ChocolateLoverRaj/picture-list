@@ -1,3 +1,8 @@
+import {
+  Form,
+  Input
+} from 'antd'
+
 const RenameForm = props => {
   const { form, originalName } = props
 
