@@ -3,21 +3,12 @@ import {
   Input
 } from 'antd'
 import GlobalContext from '../contexts/Global'
-import { 
-  useContext,
-  useRef
-} from 'react'
+import { useContext } from 'react'
 
 const RenameForm = props => {
   const { form, originalName } = props
 
   const [lists] = useContext(GlobalContext)
-  const ref = useRef(null)
-
-  // Focus on mount
-  useEffect(() => {
-    ref.current.focus()
-  }, [])
 
   return (
     <Form
@@ -52,7 +43,6 @@ const RenameForm = props => {
         ]}
       >
         <Input 
-          ref={ref}
           placeholder='Grocery List' 
         />
       </Form.Item>
