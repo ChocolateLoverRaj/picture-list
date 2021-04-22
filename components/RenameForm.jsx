@@ -14,7 +14,7 @@ const RenameForm = props => {
     <Form
       form={form}
       initialValues={{
-        name: name ?? ''
+        name: originalName ?? ''
       }}
     >
       <Form.Item
