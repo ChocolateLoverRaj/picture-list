@@ -19,6 +19,7 @@ import {
 } from 'react'
 import Link from 'next/link'
 import Camera from 'react-html5-camera-photo'
+import ImageInput from '../../components/ImageInput'
 
 const { TextArea } = Input
 
@@ -71,13 +72,7 @@ const ListPage = () => {
               title='Add Item'
               onCancel={handleCancel}
             >
-              <Form
-                form={form}
-                initialValues={{
-                  name: '',
-                  description: ''
-                }}
-              >
+              <Form form={form}>
                 <Form.Item
                   label='Name'
                   name='name'
@@ -91,6 +86,12 @@ const ListPage = () => {
                   name='description'
                 >
                   <TextArea />
+                </Form.Item>
+                <Form.Item
+                  label='Picture'
+                  name='picture'
+                >
+                  <ImageInput />
                 </Form.Item>
               </Form>
             </Modal>
