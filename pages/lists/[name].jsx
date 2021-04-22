@@ -18,7 +18,6 @@ import {
   useState
 } from 'react'
 import Link from 'next/link'
-import Camera from 'react-html5-camera-photo'
 import ImageInput from '../../components/ImageInput'
 
 const { TextArea } = Input

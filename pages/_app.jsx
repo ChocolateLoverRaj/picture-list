@@ -3,6 +3,7 @@ import 'antd/dist/antd.css'
 import GlobalContext from '../contexts/Global'
 import useLocalStorage from 'use-local-storage'
 import Nav from '../components/Nav'
+import 'react-html5-camera-photo/build/css/index.css'
 
 const App = props => {
   const { Component, pageProps } = props

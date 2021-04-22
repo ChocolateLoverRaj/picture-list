@@ -10,6 +10,7 @@ import {
   DeleteOutlined
 } from '@ant-design/icons'
 import { useState } from 'react'
+import Camera from 'react-html5-camera-photo'
 
 const ImageInput = props => {
   const { value, onChange } = props
