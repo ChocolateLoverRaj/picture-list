@@ -36,17 +36,17 @@ const ImageInput = props => {
   return (
     <>
       <Card
-        cover={value !== undefined
-          ? taking
-            ? <Webcam audio={false} />
-            : <Image src={value} />
-          : (
-            <Empty 
-              image={<PictureOutlined />}
-            >
-              No Picture Selected
-            </Empty>
-          )}
+        cover={taking
+          ? <Webcam audio={false} />
+          : value !== undefined
+            ? <Image src={value} />
+            : (
+              <Empty 
+                image={<PictureOutlined />}
+              >
+                No Picture Selected
+              </Empty>
+            )}
         actions={[
           <CameraOutlined 
             onClick={handleTake}
