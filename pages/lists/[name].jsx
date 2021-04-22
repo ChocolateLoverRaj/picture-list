@@ -23,7 +23,7 @@ const ListPage = () => {
     setLists
   ] = useContext(GlobalContext)
 
-  const list = lists.find({ 
+  const list = lists.find(({ 
     name: currentName 
   }) => currentName === name)
 
