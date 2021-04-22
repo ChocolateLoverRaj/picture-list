@@ -7,9 +7,11 @@ import {
 import {
   PictureOutlined,
   CameraOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  CheckOutlined,
+  CloseOutlined
 } from '@ant-design/icons'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Webcam from 'react-webcam'
 
 const ImageInput = props => {
@@ -28,8 +30,16 @@ const ImageInput = props => {
     onChange?.(undefined)
   }
 
-  const handleTakePhoto = dataUri => {
-    onChange?.(dataUri)
+  const handleCancel = () => {
+    setTaking(false)
+  }
+
+  const ref = useRef(null)
+
+  const handleTakePhoto = () => {
+    onChange?.(
+      ref.current.getScreenshot()
+    )
     setTaking(false)
   }
 
@@ -47,19 +57,28 @@ const ImageInput = props => {
                 No Picture Selected
               </Empty>
             )}
-        actions={[
-          <CameraOutlined 
-            onClick={handleTake}
-          />,
-          <Popconfirm 
-            title='Are you sure you want to delete this picture?'
-            onConfirm={handleDelete}
-            okText='Yes'
-            cancelText='No'
-          >
-            <DeleteOutlined />
-          </Popconfirm>
-        ]}
+        actions={taking
+          ? [
+            <CheckOutlined
+              onClick={handleTakePhoto}
+            />,
+            <CloseOutlined
+              onClick={handleCancel}
+            />
+          ]
+          : [
+            <CameraOutlined 
+              onClick={handleTake}
+            />,
+            <Popconfirm 
+              title='Are you sure you want to delete this picture?'
+              onConfirm={handleDelete}
+              okText='Yes'
+              cancelText='No'
+            >
+              <DeleteOutlined />
+            </Popconfirm>
+          ]}
       />
     </>
   )
