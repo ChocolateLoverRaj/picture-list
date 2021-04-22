@@ -82,7 +82,7 @@ const ListPage = () => {
               </Button>
             }
           />
-        )
+        )}
     </>
   )
 }
