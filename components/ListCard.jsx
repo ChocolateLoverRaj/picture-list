@@ -13,7 +13,6 @@ import {
   DeleteOutlined,
   EditOutlined
 } from '@ant-design/icons'
-import styles from '../styles/ListCard.module.css'
 import RenameForm from './RenameForm'
 
 const ListCard = props => {
@@ -63,7 +62,6 @@ const ListCard = props => {
   return (
     <>
       <Card
-        className={styles.card}
         title={name}
         extra={
           <Link 
