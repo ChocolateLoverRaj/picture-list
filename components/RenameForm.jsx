@@ -2,9 +2,13 @@ import {
   Form,
   Input
 } from 'antd'
+import GlobalContext from '../contexts/Global'
+import { useContext } from 'react'
 
 const RenameForm = props => {
   const { form, originalName } = props
+
+  const [lists] = useContext(GlobalContext)
 
   return (
     <Form
