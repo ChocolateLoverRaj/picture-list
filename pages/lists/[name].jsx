@@ -75,7 +75,7 @@ const ListPage = () => {
                 form={form}
                 initialValues={{
                   name: '',
-                  description: ''
+                  //description: ''
                 }}
               >
                 <Form.Item
@@ -86,12 +86,12 @@ const ListPage = () => {
                     placeholder='Coconut Milk'
                   />
                 </Form.Item>
-                <Form.Item
+                {/*<Form.Item
                   label='Description'
                   name='description'
                 >
                   <Textarea />
-                </Form.Item>
+                </Form.Item>*/}
               </Form>
             </Modal>
           </>
