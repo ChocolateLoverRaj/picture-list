@@ -90,6 +90,7 @@ const ListCard = props => {
         title={`Rename list '${name}'`}
         visible={renaming}
         onCancel={handleCancel}
+        onOk={handleOk}
       >
         <RenameForm
           form={form}
