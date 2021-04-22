@@ -4,7 +4,9 @@ import Link from 'next/link'
 import {
   Card,
   Popconfirm,
-  Modal
+  Modal,
+  Form,
+  message
 } from 'antd'
 import {
   EyeOutlined,
@@ -26,6 +28,7 @@ const ListCard = props => {
   }
 
   const [renaming, setRenaming] = useState(false)
+  const [form] = Form.useForm()
 
   const handleRename = () => {
     setRenaming(true)
@@ -33,6 +36,27 @@ const ListCard = props => {
 
   const handleCancel = () => {
     setRenaming(false)
+  }
+
+  const list = lists[index]
+
+  const handleOk = () => {
+    form
+      .validateFields()
+      .then(values => {
+        const name = values.name.trim()
+        setLists([
+          ...lists.slice(0, index),
+          {
+            ...list,
+            name
+          },
+          ...lists.slice(index + 1)
+        ])
+        setRenaming(false)
+        message.success(`Successfully renamed list to '${name}'`)
+      })
+      .catch(null)
   }
 
   return (
@@ -66,7 +90,10 @@ const ListCard = props => {
         visible={renaming}
         onCancel={handleCancel}
       >
-        Rename form coming soon
+        <Form
+          form={form}
+          originalName={name}
+        />
       </Modal>
     </>
   )
