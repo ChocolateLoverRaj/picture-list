@@ -25,7 +25,7 @@ const ListPage = () => {
 
   const list = lists.find({ 
     name: currentName 
-  }) => currentName === name
+  }) => currentName === name)
 
   const [
     adding, 
