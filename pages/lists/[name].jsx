@@ -20,7 +20,7 @@ import {
 import Link from 'next/link'
 import Camera from 'react-html5-camera-photo'
 
-const { Textarea } = Input
+const { TextArea } = Input
 
 const ListPage = () => {
   const { query: { name } } = useRouter()
@@ -90,7 +90,7 @@ const ListPage = () => {
                   label='Description'
                   name='description'
                 >
-                  <Input />
+                  <TextArea />
                 </Form.Item>
               </Form>
             </Modal>
