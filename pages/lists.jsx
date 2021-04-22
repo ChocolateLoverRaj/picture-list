@@ -2,7 +2,8 @@ import Title from '../components/Title'
 import { 
   Input, 
   Button, 
-  Empty
+  Empty,
+  List
 } from 'antd'
 import { 
   SearchOutlined,
@@ -58,13 +59,35 @@ const App = () => {
       />
       {lists.length > 0
         ? filteredLists.length > 0
-          ? filteredLists.map(({ name }, i) => (
-            <ListCard 
-              key={name}
-              index={i} 
-              name={name} 
+          ? (
+            <List
+              grid={{
+                gutter: 16,
+                xs: 1,
+                sm: 2,
+                md: 4,
+                lg: 4,
+                xl: 6,
+                xxl: 3,
+              }}
+              dataSource={filteredLists
+                .map((item, i) => [
+                  item, 
+                  i
+                ])}
+              renderItem={([
+                  { name }, 
+                  index
+                ]) => (
+                <List.Item>
+                  <ListCard
+                    index={index}
+                    name={name} 
+                  />
+                </List.Item>
+              )}
             />
-          ))
+          )
           : (
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
