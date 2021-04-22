@@ -1,7 +1,7 @@
 import { mainTitle, listsTitle } from '../../lib/titles'
 import Title from '../../components/Title'
 import { useRouter } from 'next/router'
-import GlobalContext from '../contexts/GlobalContext'
+import GlobalContext from '../../contexts/GlobalContext'
 import {
   Statistic,
   Button,
