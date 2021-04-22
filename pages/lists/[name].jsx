@@ -6,7 +6,9 @@ import {
   Statistic,
   Button,
   Modal,
-  Result
+  Result,
+  Form,
+  Input
 } from 'antd'
 import {
   PlusOutlined
@@ -16,6 +18,9 @@ import {
   useState
 } from 'react'
 import Link from 'next/link'
+import Camera from 'react-html5-camera-photo'
+
+const { Textarea } = Input
 
 const ListPage = () => {
   const { query: { name } } = useRouter()
@@ -42,6 +47,8 @@ const ListPage = () => {
     setAdding(false)
   }
 
+  const [form] = Form.useForm()
+
   return (
     <>
       <Title paths={[name, listsTitle, mainTitle]} />
@@ -64,7 +71,28 @@ const ListPage = () => {
               title='Add Item'
               onCancel={handleCancel}
             >
-              Add form coming soon
+              <Form
+                form={form}
+                initialValues={{
+                  name: '',
+                  description: ''
+                }}
+              >
+                <Form.Item
+                  label='Name'
+                  name='name'
+                >
+                  <Input
+                    placeholder='Coconut Milk'
+                  />
+                </Form.Item>
+                <Form.Item
+                  label='Description'
+                  name='description'
+                >
+                  <Textarea />
+                </Form.Item>
+              </Form>
             </Modal>
           </>
         )
