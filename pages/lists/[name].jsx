@@ -79,6 +79,8 @@ const ListPage = () => {
           ])
           form.resetFields()
           setAdding(false)
+          alert(JSON.stringify(localStorage.getItem('lists')))
+          alert(JSON.stringify(localStorage.getItem('pictures')))
         })
         .catch(null)
   }
