@@ -14,7 +14,7 @@ const PictureList = props => {
     pictures: [pictures]
   } = useContext(GlobalContext)
 
-  const list = lists[i]
+  const list = lists[index]
 
   return (
     <List
