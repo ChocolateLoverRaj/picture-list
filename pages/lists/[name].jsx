@@ -30,9 +30,11 @@ const ListPage = () => {
     setLists
   ] = useContext(GlobalContext)
 
-  const list = lists.find(({ 
+  const index = lists.findIndex(({ 
     name: currentName 
   }) => currentName === name)
+
+  const list = lists[index]
 
   const [
     adding, 
@@ -48,6 +50,26 @@ const ListPage = () => {
   }
 
   const [form] = Form.useForm()
+
+  const handleOk = () => {
+    form
+      .validateFields()
+        .then(values => {
+          setLists([
+            ...lists.slice(0, index),
+            {
+              ...list,
+              items: [
+                ...list.items,
+                values
+              ]
+            },
+            ...lists.slice(index + 1)
+          ])
+          setAdding(false)
+        })
+        .catch(null)
+  }
 
   return (
     <>
@@ -70,6 +92,7 @@ const ListPage = () => {
               visible={adding}
               title='Add Item'
               onCancel={handleCancel}
+              onOk={handleOk}
             >
               <Form form={form}>
                 <Form.Item
@@ -89,6 +112,20 @@ const ListPage = () => {
                 <Form.Item
                   label='Picture'
                   name='picture'
+                  rules={[({ 
+                    getFieldValue 
+                  }) => ({
+                    validator: (_, value) => (
+                        getFieldValue('name').trim().length !== 0 ||
+                        value !== undefined
+                    )
+                      ? Promise.resolve()
+                      : Promise.reject(
+                        new Error(
+                          'Items must have a name or a picture!'
+                        )
+                      )
+                  })]}
                 >
                   <ImageInput />
                 </Form.Item>
