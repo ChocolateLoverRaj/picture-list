@@ -41,9 +41,7 @@ const NewList = props => {
         message.success(`Created a list called '${name}'`)
         router.replace(`/lists/${name}`)
       })
-      .catch(e => {
-        alert(e.message)
-      })
+      .catch(null)
   }
 
   const handleCancel = () => {
