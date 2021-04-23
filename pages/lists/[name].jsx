@@ -103,7 +103,7 @@ const ListPage = () => {
           <>
             <Statistic
               title='Items'
-              value={list.length}
+              value={list.items.length}
             />
             <Button
               type='primary'
