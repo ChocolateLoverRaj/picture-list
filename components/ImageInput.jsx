@@ -52,7 +52,12 @@ const ImageInput = props => {
     <>
       <Card
         cover={taking
-          ? <Webcam audio={false} />
+          ? (
+            <Webcam 
+              ref={ref} 
+              audio={false} 
+            />
+          )
           : value !== undefined
             ? <Image src={value} />
             : (
