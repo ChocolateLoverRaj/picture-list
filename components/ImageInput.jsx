@@ -37,9 +37,14 @@ const ImageInput = props => {
   const ref = useRef(null)
 
   const handleTakePhoto = () => {
-    onChange?.(
+    try { 
+      onChange?.(
       ref.current.getScreenshot()
     )
+    } catch (e ) {
+      alert(e.message)
+    }
+    
     setTaking(false)
   }
 
