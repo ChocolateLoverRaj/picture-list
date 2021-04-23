@@ -25,10 +25,10 @@ const PictureList = props => {
         const picture = pictures.pictures
           .find(({ 
             id
-          }) => id === item)
+          }) => id === item.id)
         return(
           <List.Item
-            key={item}
+            key={item.id}
             actions={[
               <Checkbox />
             ]}

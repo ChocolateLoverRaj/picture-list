@@ -73,7 +73,10 @@ const ListPage = () => {
               ...list,
               items: [
                 ...list.items,
-                id
+                {
+                  id,
+                  checked: false
+                }
               ]
             },
             ...lists.slice(index + 1)
