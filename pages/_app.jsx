@@ -14,7 +14,7 @@ const App = props => {
       'lists', 
       initialLists
     )
-    : initialLists
+    : [initialLists]
   
   const initialPictures = {
     pictures: [],
@@ -25,7 +25,7 @@ const App = props => {
       'pictures', 
       initialPictures
     )
-    : initialPictures
+    : [initialPictures]
   
   return (
     <GlobalContext.Provider
