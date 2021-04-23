@@ -77,6 +77,7 @@ const ListPage = () => {
             },
             ...lists.slice(index + 1)
           ])
+          form.resetFields()
           setAdding(false)
         })
         .catch(null)
