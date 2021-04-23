@@ -18,14 +18,14 @@ const PictureList = props => {
 
   return (
     <List
-      itemLayout='vertiacal'
+      itemLayout='vertical'
       size='large'
       dataSource={list.items}
       renderItem={item => {
         const picture = pictures.pictures
           .find(({ 
             id
-          }) => id === item
+          }) => id === item)
         return(
           <List.Item
             key={item}
