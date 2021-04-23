@@ -15,8 +15,7 @@ import {
 } from '@ant-design/icons'
 import {
   useContext,
-  useState,
-  useEffect
+  useState
 } from 'react'
 import Link from 'next/link'
 import ImageInput from '../../components/ImageInput'
@@ -52,15 +51,6 @@ const ListPage = () => {
 
   const [form] = Form.useForm()
 
-  useEffect(() => {
-    try {
-    alert(JSON.stringify(list))
-    alert(list.length)
-    }catch(e){
-      alert(e.message)
-    }
-  }, [list])
-
   const handleOk = () => {
     form
       .validateFields()
@@ -89,8 +79,6 @@ const ListPage = () => {
           ])
           form.resetFields()
           setAdding(false)
-          alert(JSON.stringify(localStorage.getItem('lists')))
-          alert(JSON.stringify(localStorage.getItem('pictures')))
         })
         .catch(null)
   }
