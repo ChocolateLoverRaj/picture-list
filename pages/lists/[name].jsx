@@ -51,6 +51,11 @@ const ListPage = () => {
 
   const [form] = Form.useForm()
 
+  useEffect(() => {
+    alert(JSON.strigify(list))
+    alert(list.length)
+  }, [list])
+
   const handleOk = () => {
     form
       .validateFields()
