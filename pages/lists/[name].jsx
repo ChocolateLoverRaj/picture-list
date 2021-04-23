@@ -54,7 +54,7 @@ const ListPage = () => {
 
   useEffect(() => {
     try {
-    alert(JSON.strigify(list))
+    alert(JSON.stringify(list))
     alert(list.length)
     }catch(e){
       alert(e.message)
