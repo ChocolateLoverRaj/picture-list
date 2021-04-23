@@ -19,6 +19,7 @@ import {
 } from 'react'
 import Link from 'next/link'
 import ImageInput from '../../components/ImageInput'
+import PictureList from '../../components/PictureList'
 
 const { TextArea } = Input
 
@@ -143,6 +144,7 @@ const ListPage = () => {
                 </Form.Item>
               </Form>
             </Modal>
+            <PictureList index={index} />
           </>
         )
         : (
