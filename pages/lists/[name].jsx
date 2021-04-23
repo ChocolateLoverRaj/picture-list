@@ -53,8 +53,12 @@ const ListPage = () => {
   const [form] = Form.useForm()
 
   useEffect(() => {
+    try {
     alert(JSON.strigify(list))
     alert(list.length)
+    }catch(e){
+      alert(e.message)
+    }
   }, [list])
 
   const handleOk = () => {
