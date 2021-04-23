@@ -63,7 +63,7 @@ const ListPage = () => {
               ...pictures.pictures,
               {
                 id,
-                values
+                ...values
               }
             ]
           })
