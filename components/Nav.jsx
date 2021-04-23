@@ -26,7 +26,7 @@ const Nav = () => {
     route, 
     query: { name } 
   } = useRouter()
-  const [lists] = useContext(GlobalContext)
+  const [lists] = useContext(GlobalContext).lists
 
   return (
     <Breadcrumb>

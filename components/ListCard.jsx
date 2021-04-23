@@ -18,7 +18,7 @@ import RenameForm from './RenameForm'
 const ListCard = props => {
   const { index, name } = props
 
-  const [lists, setLists] = useContext(GlobalContext)
+  const [lists, setLists] = useContext(GlobalContext).lists
 
   const handleConfirm = () => {
     setLists([

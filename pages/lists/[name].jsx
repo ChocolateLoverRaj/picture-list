@@ -25,10 +25,10 @@ const { TextArea } = Input
 const ListPage = () => {
   const { query: { name } } = useRouter()
 
-  const [
-    lists, 
-    setLists
-  ] = useContext(GlobalContext)
+  const {
+    lists: [lists, setLists],
+    pictures: [pictures, setPictures]
+  } = useContext(GlobalContext)
 
   const index = lists.findIndex(({ 
     name: currentName 
@@ -55,13 +55,24 @@ const ListPage = () => {
     form
       .validateFields()
         .then(values => {
+          const id = pictures.nextId
+          setPictures({
+            nextId: id + 1,
+            pictures: [
+              ...pictures.pictures,
+              {
+                id,
+                values
+              }
+            ]
+          })
           setLists([
             ...lists.slice(0, index),
             {
               ...list,
               items: [
                 ...list.items,
-                values
+                id
               ]
             },
             ...lists.slice(index + 1)

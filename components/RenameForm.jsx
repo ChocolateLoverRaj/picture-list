@@ -8,7 +8,7 @@ import { useContext } from 'react'
 const RenameForm = props => {
   const { form, originalName } = props
 
-  const [lists] = useContext(GlobalContext)
+  const [lists] = useContext(GlobalContext).lists
 
   return (
     <Form

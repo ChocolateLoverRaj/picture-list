@@ -15,7 +15,7 @@ import RenameForm from '../components/RenameForm'
 const { useForm } = Form
 
 const NewList = props => {
-  const [lists, setLists] = useContext(GlobalContext)
+  const [lists, setLists] = useContext(GlobalContext).lists
   const [creating, setCreating] = useState(false)
   const [form] = useForm()
   const router = useRouter()

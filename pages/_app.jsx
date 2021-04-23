@@ -8,13 +8,31 @@ import 'react-html5-camera-photo/build/css/index.css'
 const App = props => {
   const { Component, pageProps } = props
 
+  const initialLists = []
   const listsState = typeof window !== 'undefined'
-    ? useLocalStorage('lists', [])
-    : [[]]
+    ? useLocalStorage(
+      'lists', 
+      initialLists
+    )
+    : initialLists
+  
+  const initialPictures = {
+    pictures: [],
+    nextId: 0
+  }
+  const picturesState = typeof window !== 'undefined'
+    ? useLocalStorage(
+      'pictures', 
+      initialPictures
+    )
+    : initialPictures
   
   return (
     <GlobalContext.Provider
-      value={listsState}
+      value={{ 
+        lists: listsState,
+        pictures: picturesState
+      }}
     >
       <Head>
         <link rel='manifest' href='app.webmanifest' />

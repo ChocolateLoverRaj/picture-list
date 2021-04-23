@@ -22,7 +22,7 @@ const App = () => {
   const [
     lists, 
     setLists
-  ] = useContext(GlobalContext)
+  ] = useContext(GlobalContext).lists
   const [
     search, 
     setSearch
