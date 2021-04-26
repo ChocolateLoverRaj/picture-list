@@ -1,172 +1,62 @@
-import { mainTitle, listsTitle } from '../../lib/titles'
-import Title from '../../components/Title'
-import { useRouter } from 'next/router'
-import GlobalContext from '../../contexts/Global'
-import {
-  Statistic,
-  Button,
-  Modal,
-  Result,
-  Form,
-  Input
-} from 'antd'
-import {
-  PlusOutlined
-} from '@ant-design/icons'
-import {
-  useContext,
-  useState
-} from 'react'
-import Link from 'next/link'
-import ImageInput from '../../components/ImageInput'
-import PictureList from '../../components/PictureList'
-
-const { TextArea } = Input
+import { mainTitle, listsTitle } from "../../lib/titles";
+import Title from "../../components/Title";
+import { useRouter } from "next/router";
+import GlobalContext from "../../contexts/Global";
+import { Statistic, Button, Result } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useContext, useState } from "react";
+import Link from "next/link";
+import PictureList from "../../components/PictureList";
+import ItemEditor from "../../components/ItemEditor";
 
 const ListPage = () => {
-  const { query: { name } } = useRouter()
-
   const {
-    lists: [lists, setLists],
-    pictures: [pictures, setPictures]
-  } = useContext(GlobalContext)
+    query: { name }
+  } = useRouter();
 
-  const index = lists.findIndex(({ 
-    name: currentName 
-  }) => currentName === name)
+  const [lists] = useContext(GlobalContext).lists;
 
-  const list = lists[index]
+  const index = lists.findIndex(
+    ({ name: currentName }) => currentName === name
+  );
 
-  const [
-    adding, 
-    setAdding
-  ] = useState(false)
+  const list = lists[index];
+
+  const [adding, setAdding] = useState(false);
 
   const handleAdd = () => {
-    setAdding(true)
-  }
+    setAdding(true);
+  };
 
-  const handleCancel = () => {
-    setAdding(false)
-  }
-
-  const [form] = Form.useForm()
-
-  const handleOk = () => {
-    form
-      .validateFields()
-        .then(values => {
-          const id = pictures.nextId
-          setPictures({
-            nextId: id + 1,
-            pictures: [
-              ...pictures.pictures,
-              {
-                id,
-                ...values
-              }
-            ]
-          })
-          setLists([
-            ...lists.slice(0, index),
-            {
-              ...list,
-              items: [
-                ...list.items,
-                {
-                  id,
-                  checked: false
-                }
-              ]
-            },
-            ...lists.slice(index + 1)
-          ])
-          form.resetFields()
-          setAdding(false)
-        })
-        .catch(null)
-  }
+  const handleClose = () => {
+    setAdding(false);
+  };
 
   return (
     <>
       <Title paths={[name, listsTitle, mainTitle]} />
-      {list !== undefined
-        ? (
-          <>
-            <Statistic
-              title='Items'
-              value={list.items.length}
-            />
-            <Button
-              type='primary'
-              icon={<PlusOutlined />}
-              onClick={handleAdd}
-            >
-              Add Item
+      {list !== undefined ? (
+        <>
+          <Statistic title="Items" value={list.items.length} />
+          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
+            Add Item
+          </Button>
+          <PictureList index={index} />
+        </>
+      ) : (
+        <Result
+          status="404"
+          subTitle={`Sorry, a list with the name '${name}' does not exist.`}
+          extra={
+            <Button type="primary">
+              <Link href="/lists">Back to Lists</Link>
             </Button>
-            <Modal
-              visible={adding}
-              title='Add Item'
-              onCancel={handleCancel}
-              onOk={handleOk}
-            >
-              <Form form={form}>
-                <Form.Item
-                  label='Name'
-                  name='name'
-                >
-                  <Input
-                    placeholder='Coconut Milk'
-                  />
-                </Form.Item>
-                <Form.Item
-                  label='Description'
-                  name='description'
-                >
-                  <TextArea />
-                </Form.Item>
-                <Form.Item
-                  label='Picture'
-                  name='picture'
-                  rules={[({ 
-                    getFieldValue 
-                  }) => ({
-                    validator: (_, value) => (
-                        getFieldValue('name').trim().length !== 0 ||
-                        value !== undefined
-                    )
-                      ? Promise.resolve()
-                      : Promise.reject(
-                        new Error(
-                          'Items must have a name or a picture!'
-                        )
-                      )
-                  })]}
-                >
-                  <ImageInput />
-                </Form.Item>
-              </Form>
-            </Modal>
-            <PictureList index={index} />
-          </>
-        )
-        : (
-          <Result
-            status='404'
-            subTitle={`Sorry, a list with the name '${name}' does not exist.`}
-            extra={
-              <Button
-                type='primary'
-              >
-                <Link href='/lists'>
-                  Back to Lists
-                </Link>
-              </Button>
-            }
-          />
-        )}
+          }
+        />
+      )}
+      {adding && <ItemEditor onClose={handleClose} listIndex={index} />}
     </>
-  )
-}
+  );
+};
 
-export default ListPage
+export default ListPage;

@@ -17,6 +17,14 @@
     "use-local-storage": "^2.1.1"
   },
   "devDependencies": {
+    "eslint": "7.25.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-config-standard-jsx": "10.0.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.1.0",
     "move-cli": "^1.2.1"
-  }
+  },
+  "keywords": [],
+  "name": "picture-list",
+  "description": ""
 }
