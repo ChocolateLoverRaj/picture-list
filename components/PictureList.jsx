@@ -15,22 +15,47 @@ const PictureList = props => {
   } = useContext(GlobalContext)
 
   const list = lists[index]
+  const { items } = list
 
   return (
     <List
       itemLayout='vertical'
       size='large'
-      dataSource={list.items}
-      renderItem={item => {
+      dataSource={items.map(
+        (item, index) => [item, index]
+      )}
+      renderItem={(
+        [item, itemIndex]
+      ) => {
         const picture = pictures.pictures
           .find(({ 
             id
           }) => id === item.id)
+        const handleCheck = (
+          { e: { target: { checked } } }
+        ) => {
+          setLists([
+            ...lists.slice(0, index),
+            {
+              ...list,
+              items: [
+                ...items.slice(0, itemIndex),
+                {
+                  ...item,
+                  checked
+                }
+              ]
+            }
+          ])
+        }
         return(
           <List.Item
             key={item.id}
             actions={[
-              <Checkbox />
+              <Checkbox 
+                checked={item.checked}
+                onChange={handleCheck}
+              />
             ]}
             extra={
               <Image

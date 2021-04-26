@@ -6,7 +6,8 @@ import {
   Popconfirm,
   Modal,
   message,
-  Form
+  Form,
+  Statistic
 } from 'antd'
 import {
   EyeOutlined,
@@ -83,7 +84,12 @@ const ListCard = props => {
             <DeleteOutlined />
           </Popconfirm>
         ]}
-      />
+      >
+        <Statistic
+          title='Items'
+          value={}
+        />
+      </Card>
       <Modal
         title={`Rename list '${name}'`}
         visible={renaming}
