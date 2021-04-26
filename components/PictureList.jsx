@@ -1,4 +1,4 @@
-import { List, Image, Checkbox } from "antd";
+import { List, Image, Checkbox, Popconfirm } from "antd";
 import GlobalContext from "../contexts/Global";
 import { useContext, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -29,24 +29,33 @@ const PictureList = (props) => {
         dataSource={items.map((item, index) => [item, index])}
         renderItem={([item, itemIndex]) => {
           const picture = pictures.pictures.find(({ id }) => id === item.id);
-          const handleCheck = ({ target: { checked } }) => {
+          const setItems = (items) => {
             setLists([
               ...lists.slice(0, index),
               {
                 ...list,
-                items: [
-                  ...items.slice(0, itemIndex),
-                  {
-                    ...item,
-                    checked
-                  },
-                  ...items.slice(itemIndex + 1)
-                ]
+                items
               }
+            ]);
+          };
+          const handleCheck = ({ target: { checked } }) => {
+            setItems([
+              ...items.slice(0, itemIndex),
+              {
+                ...item,
+                checked
+              },
+              ...items.slice(itemIndex + 1)
             ]);
           };
           const handleEdit = () => {
             setEditing(itemIndex);
+          };
+          const handleDelete = () => {
+            setItems([
+              ...items.slice(0, itemIndex),
+              ...items.slice(itemIndex + 1)
+            ]);
           };
           return (
             <List.Item
@@ -54,7 +63,14 @@ const PictureList = (props) => {
               actions={[
                 <Checkbox checked={item.checked} onChange={handleCheck} />,
                 <EditOutlined onClick={handleEdit} />,
-                <DeleteOutlined />
+                <Popconfirm
+                  title="Are you sure you want to delete this picture?"
+                  okText="Yes"
+                  cancelText="No"
+                  onConfirm={handleDelete}
+                >
+                  <DeleteOutlined />
+                </Popconfirm>
               ]}
               extra={<Image src={picture.picture} />}
             >
