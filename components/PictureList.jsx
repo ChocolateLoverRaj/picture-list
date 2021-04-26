@@ -39,11 +39,17 @@ const PictureList = props => {
             {
               ...list,
               items: [
-                ...items.slice(0, itemIndex),
+                ...items.slice(
+                  0, 
+                  itemIndex
+                ),
                 {
                   ...item,
                   checked
-                }
+                },
+                ...items.slice(
+                  itemIndex + 1
+                )
               ]
             }
           ])
