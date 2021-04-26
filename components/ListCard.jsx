@@ -87,7 +87,7 @@ const ListCard = props => {
       >
         <Statistic
           title='Items'
-          value={}
+          value={list.items.length}
         />
       </Card>
       <Modal
