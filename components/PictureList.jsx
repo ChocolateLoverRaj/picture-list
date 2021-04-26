@@ -32,7 +32,7 @@ const PictureList = props => {
             id
           }) => id === item.id)
         const handleCheck = (
-          { e: { target: { checked } } }
+          { target: { checked } }
         ) => {
           setLists([
             ...lists.slice(0, index),
