@@ -2,7 +2,7 @@ import { List, Image, Checkbox, Popconfirm } from "antd";
 import GlobalContext from "../contexts/Global";
 import { useContext, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import ItemEditor from "./ItemEditor";
+import ItemEdit from "./ItemEdit";
 
 const PictureList = (props) => {
   const { index } = props;
@@ -83,11 +83,7 @@ const PictureList = (props) => {
         }}
       />
       {editing !== undefined && (
-        <ItemEditor
-          onClose={handleClose}
-          listIndex={index}
-          editIndex={editing}
-        />
+        <ItemEdit onClose={handleClose} listIndex={index} editIndex={editing} />
       )}
     </>
   );
