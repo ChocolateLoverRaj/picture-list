@@ -95,7 +95,8 @@ const ItemEditor = (props) => {
           rules={[
             ({ getFieldValue }) => ({
               validator: (_, value) =>
-                getFieldValue("name").trim().length !== 0 || value !== undefined
+                getFieldValue("name")?.trim().length !== 0 ||
+                value !== undefined
                   ? Promise.resolve()
                   : Promise.reject(
                       new Error("Items must have a name or a picture!")
