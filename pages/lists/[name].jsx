@@ -2,8 +2,8 @@ import { mainTitle, listsTitle } from "../../lib/titles";
 import Title from "../../components/Title";
 import { useRouter } from "next/router";
 import GlobalContext from "../../contexts/Global";
-import { Statistic, Button, Result } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Statistic, Button, Result, PageHeader } from "antd";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import Link from "next/link";
 import PictureList from "../../components/PictureList";
@@ -35,6 +35,7 @@ const ListPage = () => {
   return (
     <>
       <Title paths={[name, listsTitle, mainTitle]} />
+      <PageHeader title={name} extra={[<EditOutlined />]} />
       {list !== undefined ? (
         <>
           <Statistic title="Items" value={list.items.length} />
