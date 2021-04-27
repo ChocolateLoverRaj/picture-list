@@ -7,7 +7,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import Link from "next/link";
 import PictureList from "../../components/PictureList";
-import ItemEditor from "../../components/ItemEditor";
+import ItemAdd from "../../components/ItemAdd";
 
 const ListPage = () => {
   const {
@@ -54,7 +54,7 @@ const ListPage = () => {
           }
         />
       )}
-      {adding && <ItemEditor onClose={handleClose} listIndex={index} />}
+      {adding && <ItemAdd onClose={handleClose} index={index} />}
     </>
   );
 };
