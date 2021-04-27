@@ -1,4 +1,4 @@
-import { List, Form, Image, Checkbox, Modal, Space, Typography } from "antd";
+import { List, Form, Image, Checkbox, Modal, Space } from "antd";
 import GlobalContext from "../contexts/Global";
 import { useContext, useState, useEffect } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -7,7 +7,6 @@ import listCount from "../lib/listCount";
 import DeletePictureInput from "./DeletePictureInput";
 
 const { useForm } = Form;
-const { Text } = Typography;
 
 const PictureList = (props) => {
   const { index } = props;
