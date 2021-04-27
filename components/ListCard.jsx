@@ -1,18 +1,15 @@
 import GlobalContext from "../contexts/Global";
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { Card, Popconfirm, Statistic } from "antd";
-import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Card, Statistic } from "antd";
+import { EyeOutlined, EditOutlined } from "@ant-design/icons";
 import ListRename from "./ListRename";
+import ListDelete from "./ListDelete";
 
 const ListCard = (props) => {
   const { index, name } = props;
 
-  const [lists, setLists] = useContext(GlobalContext).lists;
-
-  const handleConfirm = () => {
-    setLists([...lists.slice(0, index), ...lists.slice(index + 1)]);
-  };
+  const [lists] = useContext(GlobalContext).lists;
 
   const [renaming, setRenaming] = useState(false);
 
@@ -37,14 +34,7 @@ const ListCard = (props) => {
         }
         actions={[
           <EditOutlined onClick={handleRename} />,
-          <Popconfirm
-            title="Are you sure you want to delete this list?"
-            okText="Yes"
-            cancelText="No"
-            onConfirm={handleConfirm}
-          >
-            <DeleteOutlined />
-          </Popconfirm>
+          <ListDelete index={index} />
         ]}
       >
         <Statistic title="Items" value={list.items.length} />
