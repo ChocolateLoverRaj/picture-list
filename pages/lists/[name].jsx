@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import GlobalContext from "../../contexts/Global";
 import { Statistic, Button, Result, PageHeader } from "antd";
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import PictureList from "../../components/PictureList";
 import ItemAdd from "../../components/ItemAdd";
