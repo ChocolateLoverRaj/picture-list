@@ -6,11 +6,11 @@ import RenameForm from "./RenameForm";
 const { useForm } = Form;
 
 const ListRename = (props) => {
-  const { index, onClose } = props;
+  const { index, onClose, onRename } = props;
 
   const [lists, setLists] = useContext(GlobalContext).lists;
   const list = lists[index];
-
+  console.log(list, lists, index);
   const [form] = useForm();
 
   const handleOk = () => {
@@ -27,6 +27,7 @@ const ListRename = (props) => {
           ...lists.slice(index + 1)
         ]);
         onClose();
+        onRename?.(name);
         message.success(
           `Successfully renamed list '${list.name}' to '${name}'`
         );
