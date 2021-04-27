@@ -49,7 +49,7 @@ const ListPage = () => {
     router.replace(`/lists/${newName}`);
   };
 
-  const handleDelete = () => {
+  const handleBack = () => {
     router.replace("/lists");
   };
 
@@ -60,9 +60,10 @@ const ListPage = () => {
         <>
           <PageHeader
             title={name}
+            onBack={handleBack}
             extra={[
               <EditOutlined onClick={handleRename} />,
-              <ListDelete index={index} onDelete={handleDelete} />
+              <ListDelete index={index} onDelete={handleBack} />
             ]}
           />
           <Statistic title="Items" value={list.items.length} />
