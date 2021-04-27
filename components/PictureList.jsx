@@ -1,8 +1,13 @@
-import { List, Image, Checkbox, Popconfirm } from "antd";
+import { List, Form, Image, Checkbox, Modal, Space, Typography } from "antd";
 import GlobalContext from "../contexts/Global";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import ItemEdit from "./ItemEdit";
+import listCount from "../lib/listCount";
+import DeletePictureInput from "./DeletePictureInput";
+
+const { useForm } = Form;
+const { Text } = Typography;
 
 const PictureList = (props) => {
   const { index } = props;
@@ -11,15 +16,58 @@ const PictureList = (props) => {
 
   const {
     lists: [lists, setLists],
-    pictures: [pictures]
+    pictures: [pictures, setPictures]
   } = useContext(GlobalContext);
 
   const list = lists[index];
   const { items } = list;
 
-  const handleClose = () => {
+  const handleEditClose = () => {
     setEditing(undefined);
   };
+
+  const [deleting, setDeleting] = useState();
+
+  const handleDeleteClose = () => {
+    setDeleting(undefined);
+  };
+
+  const handleDeleteConfirm = () => {
+    setLists([
+      ...lists.slice(0, index),
+      {
+        ...list,
+        items: [
+          ...list.items.slice(0, deleting),
+          ...list.items.slice(deleting + 1)
+        ]
+      },
+      ...lists.slice(index + 1)
+    ]);
+    if (form.getFieldValue("deletePicture")) {
+      setPictures({
+        ...pictures,
+        pictures: pictures.pictures.filter(
+          ({ id }) => id !== items[deleting].id
+        )
+      });
+    }
+    setDeleting(undefined);
+  };
+
+  const [form] = useForm();
+
+  const deletePictureRefs =
+    deleting !== undefined && listCount(items[deleting].id, lists);
+  const initialValues = deleting !== undefined && {
+    deletePicture: deletePictureRefs === 1
+  };
+  deleting !== undefined && console.log(initialValues);
+
+  // Reset fields when form is closed
+  useEffect(() => {
+    if (deleting === undefined) form.resetFields();
+  }, [deleting, form]);
 
   return (
     <>
@@ -35,7 +83,8 @@ const PictureList = (props) => {
               {
                 ...list,
                 items
-              }
+              },
+              ...lists.slice(index + 1)
             ]);
           };
           const handleCheck = ({ target: { checked } }) => {
@@ -51,11 +100,9 @@ const PictureList = (props) => {
           const handleEdit = () => {
             setEditing(itemIndex);
           };
+
           const handleDelete = () => {
-            setItems([
-              ...items.slice(0, itemIndex),
-              ...items.slice(itemIndex + 1)
-            ]);
+            setDeleting(itemIndex);
           };
           return (
             <List.Item
@@ -63,14 +110,7 @@ const PictureList = (props) => {
               actions={[
                 <Checkbox checked={item.checked} onChange={handleCheck} />,
                 <EditOutlined onClick={handleEdit} />,
-                <Popconfirm
-                  title="Are you sure you want to delete this picture?"
-                  okText="Yes"
-                  cancelText="No"
-                  onConfirm={handleDelete}
-                >
-                  <DeleteOutlined />
-                </Popconfirm>
+                <DeleteOutlined onClick={handleDelete} />
               ]}
               extra={<Image src={picture.picture} />}
             >
@@ -83,7 +123,28 @@ const PictureList = (props) => {
         }}
       />
       {editing !== undefined && (
-        <ItemEdit onClose={handleClose} listIndex={index} editIndex={editing} />
+        <ItemEdit
+          onClose={handleEditClose}
+          listIndex={index}
+          editIndex={editing}
+        />
+      )}
+      {deleting !== undefined && (
+        <Modal
+          title="Remove Item From List"
+          visible
+          onCancel={handleDeleteClose}
+          onOk={handleDeleteConfirm}
+        >
+          <Space direction="vertical">
+            Are you sure you want to remove the item from the list?
+            <Form initialValues={initialValues} form={form}>
+              <Form.Item name="deletePicture">
+                <DeletePictureInput id={items[deleting].id} />
+              </Form.Item>
+            </Form>
+          </Space>
+        </Modal>
       )}
     </>
   );
