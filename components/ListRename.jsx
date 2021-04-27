@@ -10,7 +10,7 @@ const ListRename = (props) => {
 
   const [lists, setLists] = useContext(GlobalContext).lists;
   const list = lists[index];
-  console.log(list, lists, index);
+
   const [form] = useForm();
 
   const handleOk = () => {
@@ -36,14 +36,18 @@ const ListRename = (props) => {
   };
 
   return (
-    <Modal
-      title={`Rename list '${list.name}'`}
-      visible
-      onCancel={onClose}
-      onOk={handleOk}
-    >
-      <RenameForm form={form} originalName={list.name} />
-    </Modal>
+    <>
+      {list && (
+        <Modal
+          title={`Rename list '${list.name}'`}
+          visible
+          onCancel={onClose}
+          onOk={handleOk}
+        >
+          <RenameForm form={form} originalName={list.name} />
+        </Modal>
+      )}
+    </>
   );
 };
 

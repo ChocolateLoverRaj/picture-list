@@ -4,12 +4,13 @@ import { Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const ListDelete = (props) => {
-  const { index } = props;
+  const { index, onDelete } = props;
 
   const [lists, setLists] = useContext(GlobalContext).lists;
 
   const handleConfirm = () => {
     setLists([...lists.slice(0, index), ...lists.slice(index + 1)]);
+    onDelete?.();
   };
 
   return (

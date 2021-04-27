@@ -9,6 +9,7 @@ import Link from "next/link";
 import PictureList from "../../components/PictureList";
 import ItemAdd from "../../components/ItemAdd";
 import ListRename from "../../components/ListRename";
+import ListDelete from "../../components/ListDelete";
 
 const ListPage = () => {
   const router = useRouter();
@@ -18,9 +19,9 @@ const ListPage = () => {
 
   const [lists] = useContext(GlobalContext).lists;
 
-  const index = useRef(
-    lists.findIndex(({ name: currentName }) => currentName === name)
-  ).current;
+  const index = lists.findIndex(
+    ({ name: currentName }) => currentName === name
+  );
 
   const list = lists[index];
 
@@ -48,6 +49,10 @@ const ListPage = () => {
     router.replace(`/lists/${newName}`);
   };
 
+  const handleDelete = () => {
+    router.replace("/lists");
+  };
+
   return (
     <>
       <Title paths={[name, listsTitle, mainTitle]} />
@@ -55,7 +60,10 @@ const ListPage = () => {
         <>
           <PageHeader
             title={name}
-            extra={[<EditOutlined onClick={handleRename} />]}
+            extra={[
+              <EditOutlined onClick={handleRename} />,
+              <ListDelete index={index} onDelete={handleDelete} />
+            ]}
           />
           <Statistic title="Items" value={list.items.length} />
           <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
