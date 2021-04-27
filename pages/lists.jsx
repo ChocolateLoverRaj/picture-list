@@ -9,20 +9,15 @@ import {
   SearchOutlined,
   CloseCircleFilled
 } from '@ant-design/icons'
-import useLS from 'use-local-storage'
 import NewList from '../components/NewList'
 import { useState, useContext } from 'react'
 import GlobalContext from '../contexts/Global'
-import Link from 'next/link'
 import ListCard from '../components/ListCard'
 import Fuse from 'fuse.js'
 import { mainTitle, listsTitle } from '../lib/titles'
 
 const App = () => {
-  const [
-    lists, 
-    setLists
-  ] = useContext(GlobalContext).lists
+  const [lists] = useContext(GlobalContext).lists
   const [
     search, 
     setSearch
