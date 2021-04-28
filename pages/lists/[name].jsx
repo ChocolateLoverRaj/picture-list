@@ -2,7 +2,7 @@ import { mainTitle, listsTitle } from "../../lib/titles";
 import Title from "../../components/Title";
 import { useRouter } from "next/router";
 import GlobalContext from "../../contexts/Global";
-import { Statistic, Button, Result, PageHeader } from "antd";
+import { Statistic, Button, Result, PageHeader, Dropdown, Menu } from "antd";
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import PictureList from "../../components/PictureList";
 import ItemAdd from "../../components/ItemAdd";
 import ListRename from "../../components/ListRename";
 import ListDelete from "../../components/ListDelete";
+import ItemAddExisting from '../../components/ItemAddExisting'
 
 const ListPage = () => {
   const router = useRouter();
@@ -51,7 +52,16 @@ const ListPage = () => {
 
   const handleBack = () => {
     router.replace("/lists");
+
   };
+
+  const [addingExisting, setAddingExisting] = useState(false)
+  const handleAddExisting = () => {
+    setAddingExisting(true)
+  }
+  const handleAddExistingCancel = () => {
+    setAddingExisting(false)
+  }
 
   return (
     <>
@@ -67,9 +77,19 @@ const ListPage = () => {
             ]}
           />
           <Statistic title="Items" value={list.items.length} />
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-            Add Item
-          </Button>
+          <Dropdown.Button
+            type="primary"
+            icon={<PlusOutlined />}
+            overlay={
+              <Menu>
+                <Menu.Item onClick={handleAdd}>Create New Item</Menu.Item>
+                <Menu.Item onClick={handleAddExisting}>Add Existing Items</Menu.Item>
+              </Menu>
+            }
+            onClick={handleAdd}
+          >
+            Create New Item
+          </Dropdown.Button>
           <PictureList index={index} />
         </>
       ) : (
@@ -91,6 +111,7 @@ const ListPage = () => {
           index={index}
         />
       )}
+      {addingExisting && <ItemAddExisting onClose={handleAddExistingCancel} index={index} />}
     </>
   );
 };
