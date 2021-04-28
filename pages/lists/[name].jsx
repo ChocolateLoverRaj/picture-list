@@ -10,7 +10,7 @@ import PictureList from "../../components/PictureList";
 import ItemAdd from "../../components/ItemAdd";
 import ListRename from "../../components/ListRename";
 import ListDelete from "../../components/ListDelete";
-import ItemAddExisting from '../../components/ItemAddExisting'
+import ItemAddExisting from "../../components/ItemAddExisting";
 
 const ListPage = () => {
   const router = useRouter();
@@ -52,16 +52,15 @@ const ListPage = () => {
 
   const handleBack = () => {
     router.replace("/lists");
-
   };
 
-  const [addingExisting, setAddingExisting] = useState(false)
+  const [addingExisting, setAddingExisting] = useState(false);
   const handleAddExisting = () => {
-    setAddingExisting(true)
-  }
+    setAddingExisting(true);
+  };
   const handleAddExistingCancel = () => {
-    setAddingExisting(false)
-  }
+    setAddingExisting(false);
+  };
 
   return (
     <>
@@ -72,8 +71,8 @@ const ListPage = () => {
             title={name}
             onBack={handleBack}
             extra={[
-              <EditOutlined onClick={handleRename} />,
-              <ListDelete index={index} onDelete={handleBack} />
+              <EditOutlined key="edit" onClick={handleRename} />,
+              <ListDelete key="delete" index={index} onDelete={handleBack} />
             ]}
           />
           <Statistic title="Items" value={list.items.length} />
@@ -83,7 +82,9 @@ const ListPage = () => {
             overlay={
               <Menu>
                 <Menu.Item onClick={handleAdd}>Create New Item</Menu.Item>
-                <Menu.Item onClick={handleAddExisting}>Add Existing Items</Menu.Item>
+                <Menu.Item onClick={handleAddExisting}>
+                  Add Existing Items
+                </Menu.Item>
               </Menu>
             }
             onClick={handleAdd}
@@ -111,7 +112,9 @@ const ListPage = () => {
           index={index}
         />
       )}
-      {addingExisting && <ItemAddExisting onClose={handleAddExistingCancel} index={index} />}
+      {addingExisting && (
+        <ItemAddExisting onClose={handleAddExistingCancel} index={index} />
+      )}
     </>
   );
 };
