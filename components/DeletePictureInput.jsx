@@ -6,7 +6,7 @@ import listCount from "../lib/listCount";
 const { Text } = Typography;
 
 const DeletePictureInput = (props) => {
-  const { value, onChange, children, id } = props;
+  const { value, onChange, id } = props;
 
   const [lists] = useContext(GlobalContext).lists;
 

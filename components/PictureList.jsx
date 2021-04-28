@@ -32,24 +32,32 @@ const PictureList = (props) => {
   };
 
   const handleDeleteConfirm = () => {
-    setLists([
-      ...lists.slice(0, index),
-      {
-        ...list,
-        items: [
-          ...list.items.slice(0, deleting),
-          ...list.items.slice(deleting + 1)
-        ]
-      },
-      ...lists.slice(index + 1)
-    ]);
-    if (form.getFieldValue("deletePicture")) {
+    const deletePicture = form.getFieldValue("deletePicture");
+    if (deletePicture) {
       setPictures({
         ...pictures,
         pictures: pictures.pictures.filter(
           ({ id }) => id !== items[deleting].id
         )
       });
+      setLists(
+        lists.map((list) => ({
+          ...list,
+          items: list.items.filter(({ id }) => id !== items[deleting].id)
+        }))
+      );
+    } else {
+      setLists([
+        ...lists.slice(0, index),
+        {
+          ...list,
+          items: [
+            ...list.items.slice(0, deleting),
+            ...list.items.slice(deleting + 1)
+          ]
+        },
+        ...lists.slice(index + 1)
+      ]);
     }
     setDeleting(undefined);
   };
